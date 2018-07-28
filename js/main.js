@@ -39,30 +39,28 @@ class AnimationSlide {
     this.navigate(nextOrPrev);
   }
   next() {
-    this.maybeNavigate(true);
     if (this.animationStatus === 'end') {
       this.stepIndex += 1;
-      this.animationStatus = 'start';
+      this.animationStatus = 'end';
     } else if (this.animationStatus === 'start') {
       this.animationStatus = 'end';
     }
-    if (this.animationStatus === 'end' && !this.completed(true)) {
-      this.animationStatus = 'start';
-      this.stepIndex += 1;
-    }
+    this.maybeNavigate(true);
   }
   prev() {
-    this.maybeNavigate(false);
     if (this.animationStatus === 'start') {
       this.stepIndex -= 1;
-      this.animationStatus = 'end';
+      this.animationStatus = 'start';
     } else if (this.animationStatus === 'end') {
       this.animationStatus = 'start';
     }
-    if (this.animationStatus === 'start' && !this.completed(false)) {
-      this.animationStatus = 'end';
-      this.stepIndex -= 1;
-    }
+    this.maybeNavigate(false);
+
+    // if (this.animationStatus === 'start' && !this.completed(false)) {
+    //   console.log('here');
+    //   this.stepIndex -= 1;
+    //   this.animationStatus = 'end';
+    // }
   }
 
   completed(nextOrPrev) {
@@ -80,6 +78,7 @@ class AnimationSlide {
     ) {
       return true;
     }
+    return false;
   }
 
   render() {

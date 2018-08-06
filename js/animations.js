@@ -96,7 +96,7 @@ class BeadAnimationSlide extends AnimationSlide {
         from: this.beadX,
         to: _w / 2,
         render: () => {
-          drawBead({ x: this.beadX, y: _h / 2, c: this.c });
+          drawBead({ x: this.beadX, y: this.beadY, c: this.c });
         },
         duration: 500,
         animate: ({ nextOrPrev, to, from }) =>
@@ -104,6 +104,7 @@ class BeadAnimationSlide extends AnimationSlide {
             from: this.beadX,
             to: nextOrPrev ? to : from,
             duration: 500,
+            mass: 3
           }).start((value) => {
             this.beadX = value;
             this.render();
@@ -114,8 +115,13 @@ class BeadAnimationSlide extends AnimationSlide {
         from: this.nh2Radius,
         to: 125,
         render: () => {
-          drawBead({ x: this.beadX, y: _h / 2, c: this.c });
-          drawBeadNh2({ r: this.nh2Radius, c: this.c });
+          drawBead({ x: this.beadX, y: this.beadY, c: this.c });
+          drawBeadNh2({
+            r: this.nh2Radius,
+            c: this.c,
+            x: this.beadX,
+            y: this.beadY,
+          });
         },
         duration: 500,
         animate: ({ nextOrPrev, to, from }) =>
@@ -133,7 +139,12 @@ class BeadAnimationSlide extends AnimationSlide {
         to: 0,
         render: () => {
           drawBead({ x: this.beadX, y: this.beadY, c: this.c });
-          drawBeadNh2({ r: this.nh2Radius, c: this.c, x: this.beadX, y: this.beadY });
+          drawBeadNh2({
+            r: this.nh2Radius,
+            c: this.c,
+            x: this.beadX,
+            y: this.beadY,
+          });
         },
         duration: 500,
         animate: ({ nextOrPrev, to, from }) =>

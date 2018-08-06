@@ -1,4 +1,4 @@
-import { tween } from 'popmotion';
+import { tween, spring } from 'popmotion';
 import { drawBead, drawBeadNh2 } from './drawFunctions';
 
 class AnimationSlide {
@@ -100,7 +100,7 @@ class BeadAnimationSlide extends AnimationSlide {
         },
         duration: 500,
         animate: ({ nextOrPrev, to, from }) =>
-          tween({
+          spring({
             from: this.beadX,
             to: nextOrPrev ? to : from,
             duration: 500,

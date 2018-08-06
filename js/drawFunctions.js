@@ -1,3 +1,5 @@
+const BEAD_RADIUS = 125;
+
 const drawCircle = ({
   color, x, y, radius, c,
 }) => {
@@ -34,20 +36,53 @@ export const drawFormula = ({
 
   c.restore();
 };
+export const drawBeadNh2 = ({
+  r, c, x = _w / 2, y = _h / 2,
+}) => {
+  const lineLength = 50;
+  for (let i = 0; i < 2 * Math.PI; i += (Math.PI * 2) / 5) {
+    const xStart = x + r * Math.cos(i);
+    const yStart = y + r * Math.sin(i);
+    const xEnd = x + (lineLength + r) * Math.cos(i);
+    const yEnd = y + (lineLength + r) * Math.sin(i);
+
+    c.lineWidth = 4;
+    c.strokeStyle = 'black';
+    c.beginPath();
+    c.moveTo(xStart, yStart);
+    c.lineTo(xEnd, yEnd);
+    c.closePath();
+    c.stroke();
+    // drawFormula({ parts, x, y, center = true, fontSize, c,});
+    c.fillStyle = 'gray';
+    c.beginPath();
+    c.arc(xEnd, yEnd, 25, 0, Math.PI * 2, true);
+    c.fill();
+    c.closePath();
+    c.fillStyle = 'black';
+    drawFormula({
+      parts: ['NH', 2],
+      x: xEnd,
+      y: yEnd,
+      fontSize: 18,
+      c,
+    });
+  }
+};
 
 export const drawBead = ({ x, y, c }) => {
   drawCircle({
     x,
     y,
     color: 'grey',
-    radius: 125,
+    radius: BEAD_RADIUS,
     c,
   });
   drawCircle({
     x,
     y,
     color: 'brown',
-    radius: 100,
+    radius: BEAD_RADIUS - 25,
     c,
   });
 

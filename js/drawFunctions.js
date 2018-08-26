@@ -1,4 +1,4 @@
-const BEAD_RADIUS = 125;
+export const BEAD_RADIUS = 100;
 
 const drawCircle = ({
   color, x, y, radius, c,
@@ -37,17 +37,22 @@ export const drawFormula = ({
   c.restore();
 };
 export const drawBeadNh2 = ({
-  r, c, x = _w / 2, y = _h / 2,
+  r,
+  c,
+  x = _w / 2,
+  y = _h / 2,
+  offsetAngle = 0,
+  lineLength = 50,
+  linkerColor = 'orange',
 }) => {
-  const lineLength = 50;
-  for (let i = 0; i < 2 * Math.PI; i += (Math.PI * 2) / 5) {
-    const xStart = x + r * Math.cos(i);
-    const yStart = y + r * Math.sin(i);
-    const xEnd = x + (lineLength + r) * Math.cos(i);
-    const yEnd = y + (lineLength + r) * Math.sin(i);
+  for (let i = -offsetAngle; i < 2 * Math.PI; i += (Math.PI * 2) / 12) {
+    const xStart = x + (r) * Math.cos(i);
+    const yStart = y + (r) * Math.sin(i);
+    const xEnd = x + (lineLength + r) * Math.cos(i - offsetAngle);
+    const yEnd = y + (lineLength + r) * Math.sin(i - offsetAngle);
 
     c.lineWidth = 4;
-    c.strokeStyle = 'black';
+    c.strokeStyle = linkerColor;
     c.beginPath();
     c.moveTo(xStart, yStart);
     c.lineTo(xEnd, yEnd);
@@ -70,19 +75,57 @@ export const drawBeadNh2 = ({
   }
 };
 
+export const drawEnzyme = ({
+  r,
+  c,
+  x = _w / 2,
+  y = _h / 2,
+  offsetAngle = 0,
+  lineLength = 50,
+  linkerColor = 'orange',
+}) => {
+  for (let i = -offsetAngle; i < 2 * Math.PI; i += (Math.PI * 2) / 12) {
+    const xStart = x + r * Math.cos(i);
+    const yStart = y + r * Math.sin(i);
+    const xEnd = x + (lineLength + r - 25) * Math.cos(i - offsetAngle);
+    const yEnd = y + (lineLength + r - 25) * Math.sin(i - offsetAngle);
+
+    const xCenter = x + (lineLength + r) * Math.cos(i - offsetAngle);
+    const yCenter = y + (lineLength + r) * Math.sin(i - offsetAngle);
+
+    c.lineWidth = 4;
+    c.strokeStyle = linkerColor;
+    c.beginPath();
+    c.moveTo(xStart, yStart);
+    c.lineTo(xEnd, yEnd);
+    c.closePath();
+    c.stroke();
+
+    // drawFormula({ parts, x, y, center = true, fontSize, c,});
+    c.lineWidth = 4;
+    c.strokeStyle = 'black';
+    c.beginPath();
+    c.arc(xCenter, yCenter, 25, 0, Math.PI * 2, true);
+    c.stroke();
+    c.closePath();
+
+    c.fillStyle = 'black';
+    drawFormula({
+      parts: ['Enz'],
+      x: xCenter,
+      y: yCenter,
+      fontSize: 18,
+      c,
+    });
+  }
+};
+
 export const drawBead = ({ x, y, c }) => {
   drawCircle({
     x,
     y,
     color: 'grey',
     radius: BEAD_RADIUS,
-    c,
-  });
-  drawCircle({
-    x,
-    y,
-    color: 'brown',
-    radius: BEAD_RADIUS - 25,
     c,
   });
 

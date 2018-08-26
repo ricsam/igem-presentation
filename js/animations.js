@@ -1,5 +1,10 @@
 import { tween, spring } from 'popmotion';
-import { drawBead, drawBeadNh2 } from './drawFunctions';
+import {
+  drawBead,
+  drawBeadNh2,
+  drawEnzyme,
+  BEAD_RADIUS,
+} from './drawFunctions';
 
 class AnimationSlide {
   constructor(buffer) {
@@ -80,16 +85,31 @@ class AnimationSlide {
 
   render() {
     this.c.clearRect(0, 0, _w, _h);
+    if (this.steps[this.stepIndex].renderAllPrevious) {
+      this.renderAllPrevious();
+    }
     this.steps[this.stepIndex].render();
   }
+
+  renderAllPrevious = () => {
+    for (let i = 0; i < this.stepIndex; i += 1) {
+      this.steps[i].render();
+    }
+  };
 }
 
 class BeadAnimationSlide extends AnimationSlide {
   constructor(buffer) {
+    buffer.width = 2 * _w;
+    buffer.height = 2 * _h;
+    buffer.style.width = `${_w}px`;
+    buffer.style.height = `${_h}px`;
     super(buffer);
     this.beadX = 0;
     this.beadY = _h / 2;
     this.nh2Radius = _w;
+    this.nh2Radius2 = _w;
+    this.enzRadius = _w;
     this.steps = [
       /* Move bead from left to right */
       {
@@ -104,7 +124,7 @@ class BeadAnimationSlide extends AnimationSlide {
             from: this.beadX,
             to: nextOrPrev ? to : from,
             duration: 500,
-            mass: 3
+            mass: 3,
           }).start((value) => {
             this.beadX = value;
             this.render();
@@ -113,9 +133,10 @@ class BeadAnimationSlide extends AnimationSlide {
       /* decrease radius of imobilized NH2 */
       {
         from: this.nh2Radius,
-        to: 125,
+        to: BEAD_RADIUS,
+        renderAllPrevious: true,
+
         render: () => {
-          drawBead({ x: this.beadX, y: this.beadY, c: this.c });
           drawBeadNh2({
             r: this.nh2Radius,
             c: this.c,
@@ -134,18 +155,63 @@ class BeadAnimationSlide extends AnimationSlide {
             this.render(value);
           }),
       },
+      /* decrease radius of second imobilized NH2 */
       {
-        from: _h / 2,
-        to: 0,
+        from: this.nh2Radius2,
+        to: BEAD_RADIUS + 75,
+        renderAllPrevious: true,
+
         render: () => {
-          drawBead({ x: this.beadX, y: this.beadY, c: this.c });
           drawBeadNh2({
-            r: this.nh2Radius,
+            r: this.nh2Radius2,
             c: this.c,
             x: this.beadX,
             y: this.beadY,
+            linkerColor: 'green',
           });
         },
+        duration: 500,
+        animate: ({ nextOrPrev, to, from }) =>
+          tween({
+            from: this.nh2Radius2,
+            to: nextOrPrev ? to : from,
+            duration: 500,
+          }).start((value) => {
+            this.nh2Radius2 = value;
+            this.render(value);
+          }),
+      },
+      /* decrease radius of second imobilized enz */
+      {
+        from: this.enzRadius,
+        to: BEAD_RADIUS + 150,
+        renderAllPrevious: true,
+
+        render: () => {
+          drawEnzyme({
+            r: this.enzRadius,
+            c: this.c,
+            x: this.beadX,
+            y: this.beadY,
+            linkerColor: 'black',
+          });
+        },
+        duration: 500,
+        animate: ({ nextOrPrev, to, from }) =>
+          tween({
+            from: this.enzRadius,
+            to: nextOrPrev ? to : from,
+            duration: 500,
+          }).start((value) => {
+            this.enzRadius = value;
+            this.render(value);
+          }),
+      },
+      {
+        from: _h / 2,
+        to: -_h,
+        renderAllPrevious: true,
+        render: () => {},
         duration: 500,
         animate: ({ nextOrPrev, to, from }) =>
           tween({

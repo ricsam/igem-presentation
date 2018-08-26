@@ -45,4 +45,8 @@ module.exports = {
     "prefer-template": 2,
     "require-yield": 0,
   },
+  "globals": {
+    "_w": false,
+    "_h": false,
+  }
 };

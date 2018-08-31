@@ -45,8 +45,6 @@
         <div id="slideNumber">Slide: <span class="value">#2</span></div>
     </div>
     <div id="impress">
-        <div id="overview-1" class="step" data-x="0" data-y="0" data-z="0" data-rotate-x="0" data-scale="5">
-        </div>
         <div class="step flex-center circle intro-circle" data-x="0" data-y="-1600" data-z="0" data-steps="4">
             <img src="./assets/logo.png" class="logo" alt="">
             <img src="./assets/lightScatter.svg" class="lightScatter" alt="" preserveAspectRatio="none">
@@ -56,11 +54,13 @@
             </div>
             <div class="sun"></div>
         </div>
+        <div id="overview-1" class="step" data-x="0" data-y="0" data-z="0" data-rotate-x="0" data-scale="5">
+        </div>
         <div class="step flex-center circle" data-x="800" data-y="-800" data-z="0">
-            content
+            <canvas id='beadAnimation'></canvas>
         </div>
         <div class="step flex-center circle" data-x="800" data-y="800" data-z="0">
-            <canvas id='beadAnimation'></canvas>
+            content
         </div>
         <div class="step flex-center circle" data-x="0" data-y="1600" data-z="0">
             content
@@ -113,8 +113,7 @@
     <div id="impress-toolbar"></div>
 
 
-    <script src="../js/impress.js"></script>
-    <script src="../src/plugins/substep/substep.js"></script>
+    <script src="./lib/impress.js"></script>
     <script>impress().init();</script>
     <!-- <script src='../js/main.js'></script> -->
 

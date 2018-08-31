@@ -7,11 +7,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './js/main.js',
+    main: './src/main.js',
   },
   plugins: [
     new CleanWebpackPlugin(['docs']),
-    new CopyWebpackPlugin([{ from: './assets', to: './' }]),
+    new CopyWebpackPlugin([
+      { from: './assets', to: './assets' },
+      { from: './impress.js', to: './lib/impress.js' }
+    ]),
     new HtmlWebpackPlugin({
       template: './index.html',
     }),

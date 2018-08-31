@@ -158,7 +158,7 @@ class BeadAnimationSlide extends AnimationSlide {
       /* decrease radius of second imobilized NH2 */
       {
         from: this.nh2Radius2,
-        to: BEAD_RADIUS + 75,
+        to: BEAD_RADIUS + 65,
         renderAllPrevious: true,
 
         render: () => {
@@ -184,7 +184,7 @@ class BeadAnimationSlide extends AnimationSlide {
       /* decrease radius of second imobilized enz */
       {
         from: this.enzRadius,
-        to: BEAD_RADIUS + 150,
+        to: BEAD_RADIUS + 130,
         renderAllPrevious: true,
 
         render: () => {
@@ -275,4 +275,41 @@ const animationStep = (event) => {
   return false;
 };
 
+const cssTransitionStep = (event) => {
+  if (!event || !event.target) {
+    return;
+  }
+
+  const el = event.target;
+
+  const { reason } = event.detail;
+
+  const stepLength = el.getAttribute('data-steps');
+
+  if (['next', 'prev'].includes(reason) && !stepLength) {
+    return;
+  }
+
+  const currentStep = el.getAttribute('data-step') || 0;
+  const nextStep = Number(currentStep) + (reason === 'next' ? 1 : -1);
+
+  if (nextStep > stepLength || nextStep < 0) {
+    return;
+  }
+
+  el.setAttribute('data-step', nextStep);
+
+  triggerEvent(el, 'impress:substep:stepleaveaborted', {
+    reason,
+    step: {
+      el,
+      nextStep,
+    },
+  });
+
+  // Returning false aborts the stepleave event
+  return false;
+};
+
+window.impress.addPreStepLeavePlugin(cssTransitionStep, 1);
 window.impress.addPreStepLeavePlugin(animationStep, 1);

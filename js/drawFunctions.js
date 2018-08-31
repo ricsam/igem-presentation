@@ -46,8 +46,8 @@ export const drawBeadNh2 = ({
   linkerColor = 'orange',
 }) => {
   for (let i = -offsetAngle; i < 2 * Math.PI; i += (Math.PI * 2) / 12) {
-    const xStart = x + (r) * Math.cos(i);
-    const yStart = y + (r) * Math.sin(i);
+    const xStart = x + r * Math.cos(i);
+    const yStart = y + r * Math.sin(i);
     const xEnd = x + (lineLength + r) * Math.cos(i - offsetAngle);
     const yEnd = y + (lineLength + r) * Math.sin(i - offsetAngle);
 
@@ -59,17 +59,17 @@ export const drawBeadNh2 = ({
     c.closePath();
     c.stroke();
     // drawFormula({ parts, x, y, center = true, fontSize, c,});
-    c.fillStyle = 'gray';
+    c.fillStyle = '#1e1e1e';
     c.beginPath();
-    c.arc(xEnd, yEnd, 25, 0, Math.PI * 2, true);
+    c.arc(xEnd, yEnd, 15, 0, Math.PI * 2, true);
     c.fill();
     c.closePath();
-    c.fillStyle = 'black';
+    c.fillStyle = 'white';
     drawFormula({
       parts: ['NH', 2],
       x: xEnd,
       y: yEnd,
-      fontSize: 18,
+      fontSize: 12,
       c,
     });
   }
@@ -124,7 +124,7 @@ export const drawBead = ({ x, y, c }) => {
   drawCircle({
     x,
     y,
-    color: 'grey',
+    color: '#d2bb80',
     radius: BEAD_RADIUS,
     c,
   });

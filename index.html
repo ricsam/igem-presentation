@@ -10,42 +10,20 @@
     <meta name="description" content="iGEM Stockholm presentation 2018"
     />
 
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+    <link href="//fonts.googleapis.com/css?family=Roboto+Mono|Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
         rel="stylesheet" />
     <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.js"></script>
     <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.geom.js"></script>
     <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.layout.js"></script>
     <link type="text/css" rel="stylesheet" href="https://mbostock.github.io/d3/talk/20111018/style.css" />
-    <style type="text/css">
-        circle {
-            stroke: #000;
-            stroke-opacity: .5;
-        }
-    </style>
-    <link href="../css/impress-demo.css" rel="stylesheet" />
+    <!-- <link href="../css/impress-demo.css" rel="stylesheet" /> -->
 
     <link rel="shortcut icon" href="../favicon.png" />
     <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
-    <style type="text/css">
-    </style>
 </head>
 
 <body class="impress-not-supported">
     <div class="bg"></div>
-
-    <div class="fallback-message">
-        <p>Your browser
-            <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this
-            presentation.</p>
-        <p>For the best experience please use the latest
-            <b>Chrome</b>,
-            <b>Safari</b> or
-            <b>Firefox</b> browser.</p>
-    </div>
-
-
-
-    
 
     <!-- 
 
@@ -62,25 +40,27 @@
 
      -->
 
+    <div id="pageNumber">
+        <div id="slideTitle">Mechanism</div>
+        <div id="slideNumber">Slide: <span class="value">#2</span></div>
+    </div>
     <div id="impress">
-        <div class="step slide flex-center" data-x="0" data-y="0" data-z="0">
-            <img src="../assets/logo.png" alt="">
+        <div id="overview-1" class="step" data-x="0" data-y="0" data-z="0" data-rotate-x="0" data-scale="5">
         </div>
-        <div class="step slide flex-center" data-x="0" data-y="0" data-z="1600">
-            <canvas id='beadAnimation'></canvas>
-        </div>
-        <div id="overview-1" class="step" data-x="0" data-y="0" data-z="0" data-rotate-x="0" data-scale="5"></div>
-        <div id="sideview-1" class="step" data-x="0" data-y="2400" data-z="200" data-rotate-x="-90" data-scale="5">Level 1</div>
-        <div id="sideview-2" class="step" data-x="0" data-y="2400" data-z="-1400" data-rotate-x="-90" data-scale="5">Level 2</div>
-        <div id="sideview-3" class="step" data-x="0" data-y="2400" data-z="-3000" data-rotate-x="-90" data-scale="5">Level 3</div>
-        <div class="step flex-center circle" data-x="0" data-y="-1600" data-z="0">
-            content
+        <div class="step flex-center circle intro-circle" data-x="0" data-y="-1600" data-z="0" data-steps="4">
+            <img src="../assets/logo.png" class="logo" alt="">
+            <img src="../assets/lightScatter.svg" class="lightScatter" alt="" preserveAspectRatio="none">
+            <div class="ocean">
+                <img src="../assets/piller-g.svg" alt="" class="pill g">
+                <img src="../assets/piller-b.svg" alt="" class="pill b">
+            </div>
+            <div class="sun"></div>
         </div>
         <div class="step flex-center circle" data-x="800" data-y="-800" data-z="0">
             content
         </div>
         <div class="step flex-center circle" data-x="800" data-y="800" data-z="0">
-            content
+            <canvas id='beadAnimation'></canvas>
         </div>
         <div class="step flex-center circle" data-x="0" data-y="1600" data-z="0">
             content

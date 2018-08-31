@@ -1,9 +1,150 @@
+@import './bubbles';
+
+#pageNumber {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #3378c6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  #slideTitle {
+    font-family: Roboto Mono;
+    color: rgb(210, 210, 210);
+    font-size: 20px;
+    line-height: 1;
+  }
+  #slideNumber {
+    font-family: Open Sans;
+    color: #1e1e1e;
+    font-size: 14px;
+    line-height: 1;
+    text-transform: uppercase;
+    .value {
+      color: rgb(210, 210, 210);;
+    }
+  }
+}
+.step {
+}
 .circle {
   border: 1px solid black;
-  background-color: rgba(225, 225, 225, 1);
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 100%;
   width: 800px;
   height: 800px;
+}
+.intro-circle {
+  transition: background 0.5s;
+  background-color: white;
+  overflow: hidden;
+  .logo {
+    width: 500px;
+    transition: width 0.5s;
+  }
+  .sun {
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    background-color: #f36f21;
+    transition-property: all;
+    transition-delay: 500ms;
+    transition-duration: 500ms;
+  }
+  .lightScatter {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px;
+    min-width: 200px;
+    max-width: 200px;
+    z-index: 2;
+    transition: top 0.5s, height 1s ease 0.25s, opacity 1s ease 0.25s;
+    height: 0;
+    opacity: 0;
+  }
+  &[data-step="1"],
+  &[data-step="2"] {
+    .logo {
+      width: 0;
+    }
+    .sun {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .ocean {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #1139f5;
+    transform: translateY(100%);
+    transition:  transform 0.5s;
+    border-top: 1px solid black;
+  }
+  &[data-step="2"] {
+    .ocean {
+      transform: translateY(50%);
+    }
+    .lightScatter {
+      top: 50%;
+      height: 146px;
+      opacity: 1;
+    }
+  }
+  .ocean .pill {
+    opacity: 0;
+    width: 350px;
+    position: absolute;
+    transform-origin: center;
+    transition: top 0.5s ease 0.5s;
+    &.b {
+      top: 100%;
+      left: 50%;
+      animation: wiggle 3s infinite;
+    }
+    &.g {
+      top: 100%;
+      left: 10%;
+      animation: wiggle 5s infinite;
+    }
+  }
+  &[data-step="3"], &[data-step="4"] {
+    .ocean {
+      transform: translateY(0);
+    }
+    .lightScatter {
+      transition: height 0.5s, opacity 0.5s;
+      top: 50%;
+      height: 0;
+      opacity: 0;
+    } 
+    
+  }
+
+  &[data-step="4"] {
+    .ocean {
+      .pill {
+        opacity: 1;
+        &.b {
+          top: 50%;
+          left: 50%;
+        }
+        &.g {
+          top: 10%;
+          left: 10%;
+        }
+      }
+    }
+  }
+  
 }
 
 .flex-center {
@@ -22,10 +163,22 @@
 }
 
 body.impress-on-step-2 .bg {
-  background-color: blue;
+  background-color: white;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+@keyframes wiggle {
+  from {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(-5deg);
+  }
 }

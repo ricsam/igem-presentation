@@ -8,7 +8,7 @@ module.exports = {
     main: './js/main.js',
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['docs']),
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
@@ -19,7 +19,7 @@ module.exports = {
   ],
   output: {
     filename: '[hash].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
   },
   mode: 'development',
   module: {

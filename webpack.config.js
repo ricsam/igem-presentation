@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,9 +11,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['docs']),
+    new CopyWebpackPlugin([{ from: './assets', to: './' }]),
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    // new HtmlWebpackIncludeAssetsPlugin({ assets: [], append: true }),
     new webpack.ProvidePlugin({
       _w: path.resolve(__dirname, './defineWidth.js'),
       _h: path.resolve(__dirname, './defineHeight.js'),

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>iGEM Stockholm presentation 2018</title>
+
+    <meta name="description" content="iGEM Stockholm presentation 2018"
+    />
+
+    <link href="//fonts.googleapis.com/css?family=Roboto+Mono|Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+        rel="stylesheet" />
+    <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.js"></script>
+    <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.geom.js"></script>
+    <script type="text/javascript" src="https://mbostock.github.io/d3/talk/20111018/d3/d3.layout.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://mbostock.github.io/d3/talk/20111018/style.css" />
+    <!-- <link href="../css/impress-demo.css" rel="stylesheet" /> -->
+
+    <link rel="shortcut icon" href="../favicon.png" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+    <div class="bg"></div>
+
+    <!-- 
+
+            (0, -1600)
+     (-800, -800)(800, -800)
+    (-1600, 0)       (1600, 0)
+      (-800, 800)(800, 800)
+           (0, 1600)
+
+            (0, -1600)
+     (-800, -800)(800, -800)
+      (-800, 800)(800, 800)
+           (0, 1600)
+
+     -->
+
+    <div id="pageNumber">
+        <div id="slideTitle">Mechanism</div>
+        <div id="slideNumber">Slide: <span class="value">#2</span></div>
+    </div>
+    <div id="impress">
+        <div id="overview-1" class="step" data-x="0" data-y="0" data-z="0" data-rotate-x="0" data-scale="5">
+        </div>
+        <div class="step flex-center circle intro-circle" data-x="0" data-y="-1600" data-z="0" data-steps="4">
+            <img src="../assets/logo.png" class="logo" alt="">
+            <img src="../assets/lightScatter.svg" class="lightScatter" alt="" preserveAspectRatio="none">
+            <div class="ocean">
+                <img src="../assets/piller-g.svg" alt="" class="pill g">
+                <img src="../assets/piller-b.svg" alt="" class="pill b">
+            </div>
+            <div class="sun"></div>
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="-800" data-z="0">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="800" data-z="0">
+            <canvas id='beadAnimation'></canvas>
+        </div>
+        <div class="step flex-center circle" data-x="0" data-y="1600" data-z="0">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="800" data-z="0">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="-800" data-z="0">
+            content
+        </div>
+
+        <div class="step flex-center circle" data-x="0" data-y="-1600" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="-800" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="1600" data-y="0" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="800" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="0" data-y="1600" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="800" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="-800" data-z="-1600">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="-800" data-z="-3200">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="800" data-y="800" data-z="-3200">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="800" data-z="-3200">
+            content
+        </div>
+        <div class="step flex-center circle" data-x="-800" data-y="-800" data-z="-3200">
+            content
+        </div>
+        
+
+
+    </div>
+
+    <div id="impress-toolbar"></div>
+
+
+    <script src="../js/impress.js"></script>
+    <script src="../src/plugins/substep/substep.js"></script>
+    <script>impress().init();</script>
+    <!-- <script src='../js/main.js'></script> -->
+
+    <!--
+    
+    The `impress()` function also gives you access to the API that controls the presentation.
+    
+    Just store the result of the call:
+    
+        var api = impress();
+    
+    and you will get three functions you can call:
+    
+        `api.init()` - initializes the presentation,
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation,
+        `api.goto( stepIndex | stepElementId | stepElement, [duration] )` - moves the presentation to the step given by its index number
+                id or the DOM element; second parameter can be used to define duration of the transition in ms,
+                but it's optional - if not provided default transition duration for the presentation will be used.
+    
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+    
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+    
+-->
+
+<script type="text/javascript" src="79e8e1650593a4b0a4ca.bundle.js"></script></body>
+
+</html>

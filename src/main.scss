@@ -68,7 +68,8 @@
     opacity: 0;
   }
   &[data-step="1"],
-  &[data-step="2"] {
+  &[data-step="2"],
+  &[data-step="3"] {
     .logo {
       width: 0;
     }
@@ -88,8 +89,10 @@
     transform: translateY(100%);
     transition:  transform 0.5s;
     border-top: 1px solid black;
+    z-index: 1;
   }
-  &[data-step="2"] {
+  &[data-step="2"],
+  &[data-step="3"] {
     .ocean {
       transform: translateY(50%);
     }
@@ -116,16 +119,20 @@
       animation: wiggle 5s infinite;
     }
   }
-  &[data-step="3"], &[data-step="4"] {
+  &[data-step="3"],
+  &[data-step="4"] {
     .ocean {
+      transition: transform 0.5s ease 0.5s;
       transform: translateY(0);
     }
+    .sun {
+      transition: transform 0.5s;
+      transform: translateY(400px);
+    }
     .lightScatter {
-      transition: height 0.5s, opacity 0.5s;
-      top: 50%;
+      transition: height 0.5s;
       height: 0;
-      opacity: 0;
-    } 
+    }
     
   }
 

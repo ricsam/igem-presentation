@@ -1,4 +1,4 @@
-@import './bubbles';
+@import "./bubbles";
 
 #pageNumber {
   z-index: 2;
@@ -12,20 +12,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  #slideTitle {
+  .slide-title {
     font-family: Roboto Mono;
     color: rgb(210, 210, 210);
     font-size: 20px;
     line-height: 1;
   }
-  #slideNumber {
+  .slide-number {
     font-family: Open Sans;
     color: #1e1e1e;
     font-size: 14px;
     line-height: 1;
     text-transform: uppercase;
     .value {
-      color: rgb(210, 210, 210);;
+      color: rgb(210, 210, 210);
     }
   }
 }
@@ -66,6 +66,104 @@
     transition: top 0.5s, height 1s ease 0.25s, opacity 1s ease 0.25s;
     height: 0;
     opacity: 0;
+    .cls-1 {
+      fill: #f36f21;
+      stroke: #f36f21;
+      stroke-miterlimit: 10;
+    }
+  }
+  .ecotoxicity {
+    h1 {
+      font-weight: 400;
+      font-family: Open Sans;
+      font-size: 75px;
+      color: white;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      margin: 0;
+      margin-top: -50px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  }
+
+  #graph-1 {
+    display: none;
+    .cls-1 {
+      fill: none;
+      stroke: #fff;
+      stroke-miterlimit: 10;
+      stroke-width: 2px;
+    }
+
+    .cls-2 {
+      fill: #ccc;
+    }
+    width: 600px;
+    position: absolute;
+  }
+  .text-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: absolute;
+    z-index: 2;
+    .vertical, .content .text, .content .horizontal {
+      transition: transform 0.5s ease;
+    }
+    .vertical {
+      width: 1px;
+      background: white;
+      transform: scaleY(0);
+    }
+    .content {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      .text {
+        transition-delay: 0.5s;
+        font-family: Open Sans;
+        font-size: 50px;
+        color: white;
+        padding-left: 20px;
+        transform: scale(0);
+      }
+      .horizontal {
+        height: 1px;
+        background: white;
+        transform-origin: left;
+        transform: scaleX(0);
+      }
+    }
+    &.upper {
+      top: 20%;
+      left: 300px;
+      width: 450px;
+      .content .text {
+        padding-bottom: 40px;
+        transform-origin: bottom left;
+      }
+      .vertical {
+        transform-origin: bottom;
+      }
+    }
+    &.lower {
+      top: 58%;
+      left: 100px;
+      width: 600px;
+      .content .text {
+        padding-top: 40px;
+        transform-origin: top left;
+      }
+      .vertical {
+        transform-origin: top;
+      }
+    }
   }
   &[data-step="1"],
   &[data-step="2"],
@@ -87,7 +185,7 @@
     bottom: 0;
     background: #1139f5;
     transform: translateY(100%);
-    transition:  transform 0.5s;
+    transition: transform 0.5s;
     border-top: 1px solid black;
     z-index: 1;
   }
@@ -102,12 +200,15 @@
       opacity: 1;
     }
   }
-  .ocean .pill {
+  .ocean .pillwrapper {
     opacity: 0;
     width: 350px;
     position: absolute;
     transform-origin: center;
     transition: top 0.5s ease 0.5s;
+    .pill {
+      width: 350px;
+    }
     &.b {
       top: 100%;
       left: 50%;
@@ -133,12 +234,26 @@
       transition: height 0.5s;
       height: 0;
     }
-    
   }
 
-  &[data-step="4"] {
+  /* Ocean full screen */
+  &[data-step="3"],
+  &[data-step="4"],
+  &[data-step="5"],
+  &[data-step="6"],
+  &[data-step="7"] {
     .ocean {
-      .pill {
+      transition: transform 0.5s ease 0.5s;
+      transform: translateY(0);
+    }
+  }
+
+  &[data-step="4"],
+  &[data-step="5"],
+  &[data-step="6"],
+  &[data-step="7"]  {
+    .ocean {
+      .pillwrapper {
         opacity: 1;
         &.b {
           top: 50%;
@@ -151,7 +266,44 @@
       }
     }
   }
-  
+  &[data-step="5"],
+  &[data-step="6"],
+  &[data-step="7"] {
+    .ecotoxicity h1 {
+      opacity: 1;
+    }
+  }
+
+  &[data-step="5"] {
+    .ocean .pillwrapper.b {
+      transition: top 0.5s ease;
+      top: 55%;
+      left: 50%;
+    }
+  }
+
+  &[data-step="6"],
+  &[data-step="7"] {
+    .ocean .pillwrapper.b {
+      top: auto;
+      transition: all 0.5s ease;
+      top: 560px;
+      left: 226px;
+      .pill {
+        transition: all 0.5s ease;
+        transform: rotate(100deg);
+      }
+    }
+    .ocean .pillwrapper.g {
+      transition: all 0.5s ease;
+      left: 10px;
+    }
+    .text-wrapper {
+      .horizontal, .vertical, .text {
+        transform: scaleX(1);
+      }
+    }
+  }
 }
 
 .flex-center {

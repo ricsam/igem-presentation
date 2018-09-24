@@ -1,3 +1,5 @@
 import './main.scss';
-import './animations';
+import './plugins/cssTransitionStep';
+import './plugins/animationStep';
+import './plugins/slideNumber';
 

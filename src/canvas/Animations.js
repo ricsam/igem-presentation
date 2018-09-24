@@ -227,89 +227,11 @@ class BeadAnimationSlide extends AnimationSlide {
   }
 }
 
-const animations = {
+const Animations = {
   beadAnimation: new BeadAnimationSlide(
     document.getElementById('beadAnimation')
   ),
 };
 
-const triggerEvent = (el, eventName, detail) => {
-  const event = document.createEvent('CustomEvent');
-  event.initCustomEvent(eventName, true, true, detail);
-  el.dispatchEvent(event);
-};
+export default Animations;
 
-const animationStep = (event) => {
-  if (!event || !event.target) {
-    return;
-  }
-
-  const el = event.target;
-
-  const { reason } = event.detail;
-
-  if (['next', 'prev'].includes(reason) && !el.querySelector('canvas')) {
-    return;
-  }
-
-  const canvas = el.querySelector('canvas');
-
-  const animation = animations[canvas.id];
-
-  if (!animation) {
-    return;
-  }
-
-  if (animation.completed(reason === 'next')) {
-    return;
-  }
-
-  animation[reason]();
-
-  triggerEvent(el, 'impress:substep:stepleaveaborted', {
-    reason,
-    animation,
-  });
-
-  // Returning false aborts the stepleave event
-  return false;
-};
-
-const cssTransitionStep = (event) => {
-  if (!event || !event.target) {
-    return;
-  }
-
-  const el = event.target;
-
-  const { reason } = event.detail;
-
-  const stepLength = el.getAttribute('data-steps');
-
-  if (['next', 'prev'].includes(reason) && !stepLength) {
-    return;
-  }
-
-  const currentStep = el.getAttribute('data-step') || 0;
-  const nextStep = Number(currentStep) + (reason === 'next' ? 1 : -1);
-
-  if (nextStep > stepLength || nextStep < 0) {
-    return;
-  }
-
-  el.setAttribute('data-step', nextStep);
-
-  triggerEvent(el, 'impress:substep:stepleaveaborted', {
-    reason,
-    step: {
-      el,
-      nextStep,
-    },
-  });
-
-  // Returning false aborts the stepleave event
-  return false;
-};
-
-window.impress.addPreStepLeavePlugin(cssTransitionStep, 1);
-window.impress.addPreStepLeavePlugin(animationStep, 1);

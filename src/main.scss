@@ -1,5 +1,9 @@
 @import "./bubbles";
 
+body {
+  font-family: Roboto;
+}
+
 #pageNumber {
   z-index: 2;
   position: absolute;
@@ -7,19 +11,18 @@
   left: 0;
   right: 0;
   height: 40px;
-  background-color: #3378c6;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   .slide-title {
-    font-family: Roboto Mono;
+    font-family: Roboto;
     color: rgb(210, 210, 210);
     font-size: 20px;
     line-height: 1;
   }
   .slide-number {
-    font-family: Open Sans;
+    font-family: Roboto;
     color: #1e1e1e;
     font-size: 14px;
     line-height: 1;
@@ -75,7 +78,7 @@
   .ecotoxicity {
     h1 {
       font-weight: 400;
-      font-family: Open Sans;
+      font-family: Roboto;
       font-size: 75px;
       color: white;
       z-index: 1;
@@ -111,12 +114,13 @@
     justify-content: flex-start;
     position: absolute;
     z-index: 2;
-    .vertical, .content .text, .content .horizontal {
+    .vertical,
+    .content .text,
+    .content .horizontal {
       transition: transform 0.5s ease;
     }
     .vertical {
-      width: 1px;
-      background: white;
+      border-right: 1px solid white;
       transform: scaleY(0);
     }
     .content {
@@ -127,15 +131,14 @@
       justify-content: flex-start;
       .text {
         transition-delay: 0.5s;
-        font-family: Open Sans;
+        font-family: Roboto;
         font-size: 50px;
         color: white;
         padding-left: 20px;
         transform: scale(0);
       }
       .horizontal {
-        height: 1px;
-        background: white;
+        border-top: 1px solid white;
         transform-origin: left;
         transform: scaleX(0);
       }
@@ -165,6 +168,29 @@
       }
     }
   }
+
+  .abr {
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    margin-top: -156px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease 1s, transform 0.5s ease, top 0.5s ease, left 0.5s ease;
+    h1 {
+      line-height: 1.3;
+      font-size: 120px;
+      font-family: Roboto;
+      margin: 0;
+      color: white;
+      font-weight: 400;
+      &.last {
+        padding-left: 120px;
+      }
+      transition: padding 0.5s ease;
+    }
+  }
   &[data-step="1"],
   &[data-step="2"],
   &[data-step="3"] {
@@ -183,7 +209,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #1139f5;
+    background: rgba(0, 57, 255, 1);
     transform: translateY(100%);
     transition: transform 0.5s;
     border-top: 1px solid black;
@@ -220,8 +246,8 @@
       animation: wiggle 5s infinite;
     }
   }
-  &[data-step="3"],
-  &[data-step="4"] {
+  &[data-step="4"],
+  &[data-step="3"] {
     .ocean {
       transition: transform 0.5s ease 0.5s;
       transform: translateY(0);
@@ -237,21 +263,24 @@
   }
 
   /* Ocean full screen */
-  &[data-step="3"],
-  &[data-step="4"],
-  &[data-step="5"],
+  &[data-step="8"],
+  &[data-step="7"],
   &[data-step="6"],
-  &[data-step="7"] {
+  &[data-step="5"],
+  &[data-step="4"],
+  &[data-step="3"] {
     .ocean {
       transition: transform 0.5s ease 0.5s;
       transform: translateY(0);
     }
   }
 
-  &[data-step="4"],
-  &[data-step="5"],
+  /* display pill */
+  &[data-step="8"],
+  &[data-step="7"],
   &[data-step="6"],
-  &[data-step="7"]  {
+  &[data-step="5"],
+  &[data-step="4"] {
     .ocean {
       .pillwrapper {
         opacity: 1;
@@ -266,9 +295,8 @@
       }
     }
   }
-  &[data-step="5"],
   &[data-step="6"],
-  &[data-step="7"] {
+  &[data-step="5"] {
     .ecotoxicity h1 {
       opacity: 1;
     }
@@ -282,8 +310,9 @@
     }
   }
 
-  &[data-step="6"],
-  &[data-step="7"] {
+  &[data-step="8"],
+  &[data-step="7"],
+  &[data-step="6"] {
     .ocean .pillwrapper.b {
       top: auto;
       transition: all 0.5s ease;
@@ -298,9 +327,38 @@
       transition: all 0.5s ease;
       left: 10px;
     }
+  }
+
+  &[data-step="6"] {
     .text-wrapper {
-      .horizontal, .vertical, .text {
+      .horizontal,
+      .vertical,
+      .text {
         transform: scaleX(1);
+      }
+    }
+  }
+
+  &[data-step="8"],
+  &[data-step="7"] {
+    .abr {
+      opacity: 1;
+    }
+    .ocean .pillwrapper.g {
+      top: 10px;
+      transition-delay: 1s;
+    }
+  }
+  &[data-step="8"] {
+    .abr {
+      transform: scale(0.5);
+      top: 200px;
+      left: 20%;
+      .first {
+        padding-left: 120px;
+      }
+      .last {
+        padding-left: 0;
       }
     }
   }

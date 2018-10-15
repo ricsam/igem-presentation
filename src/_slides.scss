@@ -1,0 +1,455 @@
+.intro-circle {
+  transition: background 0.5s;
+  background-color: white;
+  overflow: hidden;
+  .logo {
+    width: 500px;
+    transition: width 0.5s;
+  }
+  .sun {
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    background-color: #f36f21;
+    transition-property: all;
+    transition-delay: 500ms;
+    transition-duration: 500ms;
+  }
+  .lightScatter {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px;
+    min-width: 200px;
+    max-width: 200px;
+    z-index: 2;
+    transition: top 0.5s, height 1s ease 0.25s, opacity 1s ease 0.25s;
+    height: 0;
+    opacity: 0;
+    .cls-1 {
+      fill: #f36f21;
+      stroke: #f36f21;
+      stroke-miterlimit: 10;
+    }
+  }
+  .ecotoxicity {
+    h1 {
+      font-weight: 400;
+      font-family: Roboto;
+      font-size: 75px;
+      color: white;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      margin: 0;
+      margin-top: -50px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  }
+
+  .graph {
+    svg {
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #ccc;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.5s ease;
+        transform-box: fill-box;
+      }
+    }
+    opacity: 0;
+    width: 600px;
+    position: absolute;
+    z-index: 1;
+    left: 150px;
+    right: 150px;
+
+  }
+
+  .text-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: absolute;
+    z-index: 2;
+    .vertical,
+    .content .text,
+    .content .horizontal {
+      transition: transform 0.5s ease;
+    }
+    .vertical {
+      border-right: 1px solid white;
+      transform: scaleY(0);
+    }
+    .content {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      .text {
+        transition-delay: 0.5s;
+        font-family: Roboto;
+        font-size: 50px;
+        color: white;
+        padding-left: 20px;
+        transform: scale(0);
+      }
+      .horizontal {
+        border-top: 1px solid white;
+        transform-origin: left;
+        transform: scaleX(0);
+      }
+    }
+    &.upper {
+      top: 20%;
+      left: 300px;
+      width: 450px;
+      .content .text {
+        padding-bottom: 40px;
+        transform-origin: bottom left;
+      }
+      .vertical {
+        transform-origin: bottom;
+      }
+    }
+    &.lower {
+      top: 58%;
+      left: 100px;
+      width: 600px;
+      .content .text {
+        padding-top: 40px;
+        transform-origin: top left;
+      }
+      .vertical {
+        transform-origin: top;
+      }
+    }
+  }
+
+  .abr {
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    margin-top: -156px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease 1s, transform 0.5s ease, top 0.5s ease,
+      left 0.5s ease;
+    h1 {
+      line-height: 1.3;
+      font-size: 120px;
+      font-family: Roboto;
+      margin: 0;
+      color: white;
+      font-weight: 400;
+      &.last {
+        padding-left: 120px;
+      }
+      transition: padding 0.5s ease;
+    }
+  }
+  .ocean .pillwrapper {
+    opacity: 0;
+    width: 350px;
+    position: absolute;
+    transform-origin: center;
+    transition: top 0.5s ease 0.5s;
+    .pill {
+      width: 350px;
+    }
+    &.b {
+      top: 100%;
+      left: 50%;
+      animation: wiggle 3s infinite;
+    }
+    &.g {
+      top: 100%;
+      left: 10%;
+      animation: wiggle 5s infinite;
+    }
+  }
+
+  .broken {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -400px;
+    margin-top: -130px;
+    width: 800px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s;
+    img {
+      width: 100%;
+    }
+  }
+  &[data-step="1"],
+  &[data-step="2"],
+  &[data-step="3"] {
+    .logo {
+      width: 0;
+    }
+    .sun {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .ocean {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #4b9ad3;
+    transform: translateY(100%);
+    transition: transform 0.5s;
+    border-top: 1px solid black;
+    z-index: 1;
+  }
+  &[data-step="2"],
+  &[data-step="3"] {
+    .ocean {
+      transform: translateY(50%);
+    }
+    .lightScatter {
+      top: 50%;
+      height: 146px;
+      opacity: 1;
+    }
+  }
+
+  &[data-step="4"],
+  &[data-step="3"] {
+    .ocean {
+      transition: transform 0.5s ease 0.5s;
+      transform: translateY(0);
+    }
+    .sun {
+      transition: transform 0.5s;
+      transform: translateY(400px);
+    }
+    .lightScatter {
+      transition: height 0.5s;
+      height: 0;
+    }
+  }
+
+  /* Ocean full screen */
+  &[data-step="10"],
+  &[data-step="9"],
+  &[data-step="8"],
+  &[data-step="7"],
+  &[data-step="6"],
+  &[data-step="5"],
+  &[data-step="4"],
+  &[data-step="3"] {
+    .ocean {
+      transition: transform 0.5s ease 0.5s;
+      transform: translateY(0);
+    }
+  }
+
+  /* display pill */
+  &[data-step="9"],
+  &[data-step="8"],
+  &[data-step="7"],
+  &[data-step="6"],
+  &[data-step="5"],
+  &[data-step="4"] {
+    .ocean {
+      .pillwrapper {
+        opacity: 1;
+        &.b {
+          top: 50%;
+          left: 50%;
+        }
+        &.g {
+          top: 10%;
+          left: 10%;
+        }
+      }
+    }
+  }
+  &[data-step="6"],
+  &[data-step="5"] {
+    .ecotoxicity h1 {
+      opacity: 1;
+    }
+  }
+
+  &[data-step="5"] {
+    .ocean .pillwrapper.b {
+      transition: top 0.5s ease;
+      top: 55%;
+      left: 50%;
+    }
+  }
+
+  &[data-step="9"],
+  &[data-step="8"],
+  &[data-step="7"],
+  &[data-step="6"] {
+    .ocean .pillwrapper.b {
+      top: auto;
+      transition: all 0.5s ease;
+      top: 560px;
+      left: 226px;
+      .pill {
+        transition: all 0.5s ease;
+        transform: rotate(100deg);
+      }
+    }
+    .ocean .pillwrapper.g {
+      transition: all 0.5s ease;
+      left: 10px;
+    }
+  }
+
+  &[data-step="6"] {
+    .text-wrapper {
+      .horizontal,
+      .vertical,
+      .text {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  &[data-step="9"],
+  &[data-step="8"],
+  &[data-step="7"] {
+    .abr {
+      opacity: 1;
+    }
+    .ocean .pillwrapper.g {
+      top: 10px;
+      transition-delay: 1s;
+    }
+  }
+  &[data-step="9"],
+  &[data-step="8"] {
+    .abr {
+      transform: scale(0.7);
+      top: 200px;
+      left: 16%;
+      .first {
+        padding-left: 120px;
+      }
+      .last {
+        padding-left: 0;
+      }
+    }
+    .graph {
+      opacity: 1;
+      @for $i from 1 to 9 {
+        .rect-#{$i} {
+          transition-delay: #{$i/8}s;
+        }
+      }
+      .cls-2 {
+        transform: scaleY(1);
+      }
+    }
+  }
+  &[data-step="9"] {
+    .abr, .graph {
+      transition: opacity 0.5s ease;
+      opacity: 0;
+    }
+    .ocean .pillwrapper.g {
+      transition: all 0.5s ease;
+      left: 50%;
+      top: 50%;
+      margin-left: -175px;
+      margin-top: -125px;
+      animation: wiggleSmall 0.1s infinite;
+      .pill {
+        transition: all 0.5s ease;
+        transform: scale(2) rotate(45deg);
+      }
+    }
+    .ocean .pillwrapper.b {
+      top: 100%;
+    }
+  }
+  &[data-step="10"] {
+    .broken {
+      opacity: 1;
+    }
+    .ocean {
+      animation: oceanLightning 0.5s linear 1;
+    }
+  }
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.island img.substep {
+  filter: blur(10px);
+  transition: all 0.5s;
+}
+
+.island img.substep-visible {
+  filter: blur(0);
+}
+
+body.impress-on-step-2 .bg {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@keyframes wiggle {
+  from {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes wiggleSmall {
+  from {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(-1deg);
+  }
+}
+
+@keyframes oceanLightning {
+  from {
+    background: #4b9ad3;
+  }
+  50% {
+    background: #c4cbe4;
+  }
+  to {
+    background: #4b9ad3;
+  }
+}

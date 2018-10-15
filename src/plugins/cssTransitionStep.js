@@ -1,7 +1,15 @@
 import $ from 'jquery';
 import triggerEvent from './triggerEvent';
 
-$('[data-steps]').attr('data-step', window.localStorage.getItem('local-step') || 0);
+if (process.env.NODE_ENV === 'production') {
+  window.localStorage.setItem('local-step', 0);
+}
+
+{
+  const initSlide = window.localStorage.getItem('local-step') || 0;
+  $('[data-steps]').attr('data-step', initSlide);
+  document.getElementById('current-subslide').innerHTML = initSlide;
+}
 
 const cssTransitionStep = (event) => {
   if (!event || !event.target) {
@@ -24,8 +32,11 @@ const cssTransitionStep = (event) => {
   if (nextStep > stepLength || nextStep < 0) {
     return undefined;
   }
+
   window.localStorage.setItem('local-step', nextStep);
   el.setAttribute('data-step', nextStep);
+
+  document.getElementById('current-subslide').innerHTML = nextStep;
 
   triggerEvent(el, 'impress:substep:stepleaveaborted', {
     reason,
